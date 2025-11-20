@@ -5,6 +5,7 @@ export default function HistoryList({ onSelect }) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [downloadingId, setDownloadingId] = useState(null);
 
   const load = async () => {
     setLoading(true);
@@ -27,8 +28,6 @@ export default function HistoryList({ onSelect }) {
   if (error) return <div style={{ color: 'red' }}>{error}</div>;
 
   if (!items.length) return <div>No uploads yet.</div>;
-
-  const [downloadingId, setDownloadingId] = useState(null);
 
   const handlePdf = async (id) => {
     setDownloadingId(id);

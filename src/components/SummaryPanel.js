@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import api from '../api';
 
 export default function SummaryPanel({ summary, dataset }) {
+  const [downloading, setDownloading] = useState(false);
   // Accept either `summary` (legacy) or `dataset` (preferred)
   const s = dataset?.summary || summary;
   if (!s) return null;
   const { count, averages = {}, min = {}, max = {}, type_distribution = {} } = s;
-  const [downloading, setDownloading] = useState(false);
 
   const handleDownload = async () => {
     if (!dataset?.id) return;
