@@ -25,10 +25,6 @@ services:
         fromDatabase:
           name: chemstatilizer-db
           property: connectionString
-    disk:
-      name: media
-      mountPath: /opt/render/project/src/backend/media
-      sizeGB: 1
 
 databases:
   - name: chemstatilizer-db
