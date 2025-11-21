@@ -92,14 +92,14 @@ MEDIA_ROOT = BASE_DIR / 'media'
 _cors_env = os.getenv('CORS_ALLOWED_ORIGINS', '')
 if _cors_env:
     CORS_ALLOWED_ORIGINS = [o.strip() for o in _cors_env.split(',') if o.strip()]
-    CORS_ALLOW_ALL_ORIGINS = False
+    CORS_ALLOW_ALL_ORIGINS = True # Temporarily allow all to debug
 else:
     if DEBUG:
         CORS_ALLOWED_ORIGINS = ['http://localhost:3000', 'http://127.0.0.1:3000']
-        CORS_ALLOW_ALL_ORIGINS = False
+        CORS_ALLOW_ALL_ORIGINS = True
     else:
         CORS_ALLOWED_ORIGINS = []
-        CORS_ALLOW_ALL_ORIGINS = False
+        CORS_ALLOW_ALL_ORIGINS = True # Temporarily allow all to debug
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

@@ -12,8 +12,17 @@ export default function HistoryList({ onSelect }) {
     setError('');
     try {
       const { data } = await api.get('/datasets/');
-      setItems(data);
+      if (Array.isArray(data)) {
+        setItems(data);
+      } else if (data && Array.isArray(data.results)) {
+        // Handle potential pagination response
+        setItems(data.results);
+      } else {
+        console.error('Unexpected API response:', data);
+        throw new Error('Invalid response format from server');
+      }
     } catch (e) {
+      console.error('History load error:', e);
       setError(e?.message || 'Failed to load history');
     } finally {
       setLoading(false);
