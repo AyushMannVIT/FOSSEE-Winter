@@ -50,27 +50,22 @@ export default function HistoryList({ onSelect }) {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       {items.map((d) => (
-        <div key={d.id} style={{
-          border: '1px solid #ddd', padding: 8, borderRadius: 6,
-          display: 'flex', justifyContent: 'space-between', alignItems: 'center'
-        }}>
-          <div>
-            <div style={{ fontWeight: 600 }}>{d.filename}</div>
-            <div style={{ fontSize: 12, color: '#666' }}>Rows: {d.row_count}</div>
+        <div key={d.id} className="history-item">
+          <div className="history-info">
+            <div className="history-filename">{d.filename}</div>
+            <div className="history-meta">Rows: {d.row_count}</div>
           </div>
-          <div style={{ display: 'flex', gap: 8 }}>
-            <button onClick={() => onSelect?.(d)}>Open</button>
+          <div className="history-actions">
+            <button className="btn btn-sm btn-secondary" onClick={() => onSelect?.(d)}>Open</button>
             <button
+              className="btn btn-sm btn-secondary"
               onClick={() => handlePdf(d.id)}
               disabled={downloadingId === d.id}
             >
-              {downloadingId === d.id ? 'Downloading…' : 'PDF Report'}
+              {downloadingId === d.id ? '...' : 'PDF'}
             </button>
-            {d.csv_file && (
-              <a href={d.csv_file} target="_blank" rel="noreferrer">CSV</a>
-            )}
           </div>
         </div>
       ))}

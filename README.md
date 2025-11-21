@@ -5,11 +5,10 @@ Hybrid app with Django REST (backend) and React (frontend).
 ### Local Backend
 
 ```powershell
+cd backend
 python -m venv .venv
-\.\.venv\Scripts\Activate.ps1
-pip install -r "d:/Code/FOSSEE Winter/chemstatilizer/backend/requirements.txt"
-
-cd "d:/Code/FOSSEE Winter/chemstatilizer/backend"
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
 python manage.py migrate
 python manage.py test
 python manage.py runserver
@@ -18,7 +17,7 @@ python manage.py runserver
 ### Local Frontend
 
 ```powershell
-cd "d:/Code/FOSSEE Winter/chemstatilizer"
+# In the root directory
 npm install
 npm start
 ```

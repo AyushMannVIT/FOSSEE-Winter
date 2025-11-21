@@ -14,38 +14,44 @@ function App() {
   };
 
   return (
-    <div style={{ maxWidth: 1100, margin: '24px auto', padding: '0 16px' }}>
-      <h2>Chemical Equipment Parameter Visualizer</h2>
-      <h3>Analyze and Visualize Your Chemical Equipment Data</h3>
-      <p style={{ color: '#666', marginTop: -8 }}>Upload a CSV, view summary and charts, and download a PDF report.</p>
+    <div className="app-container">
+      <header className="app-header">
+        <h2>Chemical Equipment Parameter Visualizer</h2>
+        <h3>Analyze and Visualize Your Chemical Equipment Data</h3>
+        <p>Upload a CSV, view summary and charts, and download a PDF report.</p>
+      </header>
 
-      <div style={{ marginBottom: 16 }}>
+      <div className="upload-section">
         <UploadForm onUploaded={onUploaded} />
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: 16 }}>
-        <div>
-          <h3 style={{ marginTop: 0 }}>Recent Uploads</h3>
+      <div className="dashboard-grid">
+        <aside className="sidebar">
+          <h3>Recent Uploads</h3>
           <HistoryList onSelect={setSelected} />
-        </div>
-        <div>
+        </aside>
+        <main className="main-content">
           {selected ? (
-            <>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 16 }}>
+            <div className="analysis-container">
+              <div className="card summary-card">
                 <SummaryPanel dataset={selected} />
-                <Charts summary={selected.summary} dataset={selected} />
-                {selected.csv_file && (
-                  <div>
-                    <h3>Data Table</h3>
-                    <DataTable csvUrl={selected.csv_file} />
-                  </div>
-                )}
               </div>
-            </>
+              <div className="card charts-card">
+                <Charts summary={selected.summary} dataset={selected} />
+              </div>
+              {selected.csv_file && (
+                <div className="card table-card">
+                  <h3>Data Table</h3>
+                  <DataTable csvUrl={selected.csv_file} />
+                </div>
+              )}
+            </div>
           ) : (
-            <div style={{ color: '#777' }}>Select an uploaded dataset to view details.</div>
+            <div className="empty-state">
+              <p>Select an uploaded dataset from the sidebar to view details.</p>
+            </div>
           )}
-        </div>
+        </main>
       </div>
     </div>
   );
